@@ -33,6 +33,7 @@ let contacts = [
   }
 ]
 
+app.use(express.static('build'))
 app.use(morgan('tiny'))
 app.use(cors())
 
