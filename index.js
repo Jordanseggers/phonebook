@@ -1,8 +1,11 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-const bodyParser = require("body-parser");
 const cors = require('cors')
+const Contact = require('./models/contct')
+
+const Contact = mongoose.model('Contact', contactSchema)
 
 const generateId = () => {
   const maxId = contacts.length > 0
@@ -46,7 +49,9 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/contacts', (request, response) => {
-  response.json(contacts)
+  Contact.find({}).then(contacts => {
+    response.json(contacts)
+  })
 })
 
 app.get('/api/contacts/:id', (request, response) => {
@@ -96,7 +101,7 @@ app.post('/api/contacts', (request, response) => {
   const contact = {
     name: body.name,
     number: body.number,
-    //date: new Date(),
+    date: new Date(),
     id: generateId(),
   }
 
@@ -105,7 +110,7 @@ app.post('/api/contacts', (request, response) => {
   response.json(contact)
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
