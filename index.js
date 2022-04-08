@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const bodyParser = require("body-parser");
 const cors = require('cors')
 
 const generateId = () => {
@@ -67,7 +68,11 @@ app.delete('/api/contacts/:id', (request, response) => {
 })
 
 app.post('/api/contacts', (request, response) => {
+  console.log('the function is running at least')
   const body = request.body
+  console.log(body)
+  console.log(body.name)
+  console.log(body.number)
   let matchName = contacts.filter(contact => contact.name === body.name)
   
   if (!body.name) {
@@ -91,7 +96,7 @@ app.post('/api/contacts', (request, response) => {
   const contact = {
     name: body.name,
     number: body.number,
-    date: new Date(),
+    //date: new Date(),
     id: generateId(),
   }
 
