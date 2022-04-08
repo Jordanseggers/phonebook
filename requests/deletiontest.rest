@@ -1,8 +1,3 @@
-POST http://localhost:3001/api/contacts
-content-type: application/json
+GET https://stormy-castle-82576.herokuapp.com//api/contacts
 
-{
-  "name": "nancy",
-  "number": "1111111111",
-}
 
